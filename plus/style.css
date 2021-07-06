@@ -20,6 +20,20 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+@font-face {
+  font-family: 'Helvetica Neue';
+  font-style: normal;
+  font-weight: normal;
+  src: url('fonts/HelveticaNeue-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  font-style: normal;
+  font-weight: bold;
+  src: url('fonts/HelveticaNeue-Bold.woff2') format('woff2');
+}
+
 :root {
   --light-page-color: #fdf6e3;
   --light-text-color: #586e75;
@@ -821,7 +835,7 @@ svg.rail line.unsorted {
   font: 10pt "Helvetica Neue";
   display: grid;
   grid-template-columns: 120px auto;
-  grid-template-rows: auto 4px repeat(8, auto 2px) auto 24px repeat(4, auto 24px) auto 4px auto;
+  grid-template-rows: repeat(4, auto 24px) auto 4px repeat(5, auto 4px) auto 24px auto 4px auto;
   column-gap: 16px;
   color: var(--action-text-color);
   z-index: var(--action-table-z);
@@ -873,4 +887,9 @@ svg.rail line.unsorted {
 .emph {
   color: rgb(210, 82, 82);
   font-weight: bold;
+}
+
+.keyboard-arrow {
+  position: relative;
+  top: -1px;
 }
