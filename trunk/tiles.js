@@ -15355,8 +15355,8 @@ switch(a[0]){case
 b=a[2],c=NE(a[1]);return[1,[0,cPW,[0,c,[0,ao1(b),0]]]]}},cPX=function(a){if(typeof
 a==="number")switch(a){case
 1:return 7;case
-2:return 2;case
-3:return 3;case
+2:return 3;case
+3:return 2;case
 4:return 4;case
 5:return 1}else
 switch(a[0]){case
