@@ -15357,8 +15357,8 @@ switch(a[0]){case
 b=a[2],c=Ar(a[1]);return[1,[0,cQl,[0,c,[0,apg(b),0]]]]}},cQm=function(a){if(typeof
 a==="number")switch(a){case
 1:return 7;case
-2:return 2;case
-3:return 3;case
+2:return 3;case
+3:return 2;case
 4:return 4;case
 5:return 1}else
 switch(a[0]){case
