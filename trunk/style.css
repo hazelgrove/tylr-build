@@ -9,13 +9,13 @@
   font-family: 'Fira Code';
   font-style: normal;
   font-weight: bold;
-  src: url('fonts/FiraCode-SemiBold.woff2') format('woff2');
+  src: url('fonts/FiraCode-Bold.woff2') format('woff2');
 }
 
 @font-face {
   font-family: 'Karla';
   font-style: normal;
-  font-weight: 400;
+  font-weight: normal;
   src: url(https://fonts.gstatic.com/s/karla/v14/qkBIXvYC6trAT55ZBi1ueQVIjQTD-JqaE0lK.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
@@ -34,52 +34,67 @@
   src: url('fonts/HelveticaNeue-Bold.woff2') format('woff2');
 }
 
-@font-face {
+@font-face{
   font-family: 'Source Code Pro';
-  font-style: normal;
   font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
   src: url('fonts/SourceCodePro-Regular.otf.woff2') format('woff2');
+}
+
+@font-face{
+  font-family: 'Source Code Pro';
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  src: url('fonts/SourceCodePro-Bold.otf.woff2') format('woff2');
 }
 
 :root {
   --light-page-color: #fdf6e3;
   --light-text-color: #586e75;
+  --delim-color: #657b83;
+  --ap-color: #aeb5b8;
 
   --unselected-tessera-color: #fff1f7;
-  --selection-color: #e7e1cd; /*#eee8d5;*/ /*#ffe4f1;*/
+  --selection-color: #e7e1cd;
+  --revealed-tile-color: var(--light-page-color);/*#faf2df;*/
   --selection-shadow-color: rosybrown;
 
   --hole-stroke-color: #dc322f;
   --empty-hole-fill-color: #ffef00;
 
-  --exp-bg-color: #dbf6de; /*#ddff9f;*/
-  --exp-shadow-color: #329f43; /* #709900; */
-  --exp-rail-color: #a7d3ad; /*#c4e1c8;*/
+  --exp-bg-color: #dbf6de;
+  --exp-shadow-color: #329f43;
+  --exp-rail-color: #a7d3ad;
 
   --pat-bg-color: #c4e6ff;
   --pat-shadow-color: #268bd2;
-  --pat-rail-color: #a1c4dd; /*#cadce9;*/
+  --pat-rail-color: #a1c4dd;
 
   --typ-bg-color: #caccf4;
-  --typ-shadow-color: #6168d4; /* #6c71c4; */
+  --typ-shadow-color: #6168d4;
 
   --unsorted-bg-color: #ffd0e6;
   --unsorted-shadow-color: #c76695;
-  --unsorted-rail-color: #e7bdd0; /*#f4dbe7;*/
+  --unsorted-rail-color: #e7bdd0;
 
   --bar-color: #dfdacc;
 
   --key-bg-color: var(--light-text-color);
   --key-text-color: whitesmoke;
-  --action-text-color:  var(--light-text-color);/*rgb(82, 82, 82);*/
+  --action-text-color:  var(--light-text-color);
 
   --err-flash-duration: 0.4s;
   --err-msg-duration: 1s;
+
+  --line-height: 1.45;
 
   --selection-box-z: 1;
   --genie-z: 1;
   --empty-hole-z: 2;
   --err-hole-z: 2;
+  --revealed-tile-z: 2;
   --uni-child-z: 3;
   --tile-z: 3;
   --inset-empty-hole-z: 4;
@@ -124,20 +139,14 @@
   line-height: 1.7;
 }
 
-#font-specimen, #logo-font-specimen, #type-font-specimen {
+#font-specimen, #logo-font-specimen {
   position: fixed;
   top: 0;
   left: 100%;
-  line-height: 1.45;
+  line-height: var(--line-height);
   vertical-align: middle;
 }
 
-#type-font-specimen, #type-info .code {
-  font-family: "Source Code Pro", monospace;
-  font-size: 10pt;
-  background-color: none;
-  box-shadow: none;
-}
 #logo-font-specimen, #logo {
   font-family: "Fira Code", monospace;
   font-weight: bold;
@@ -145,7 +154,8 @@
 }
 #font-specimen, #code-container {
   font-family: "Source Code Pro", monospace;
-  font-size: 14pt;
+  font-weight: normal;
+  font-size: 13pt;
 }
 
 #code-container {
@@ -182,8 +192,7 @@
   height: 100%;
 }
 #bar rect {
-  fill: var(--bar-color);/*#586e752e;*/
-  /*filter: blur(1px);*/
+  fill: var(--bar-color);
 }
 
 .history-button {
@@ -207,7 +216,7 @@
   cursor: default;
 }
 .history-button:hover svg {
-  transform: scale(108%);
+  transform: scale(110%);
 }
 .history-button.disabled:hover svg {
   transform: none;
@@ -292,7 +301,7 @@ svg.rail line.unsorted {
 
 .code {
   position: relative;
-  line-height: 1.4;
+  line-height: var(--line-height);
 }
 .code#under-the-rail {
   position: fixed;
@@ -306,16 +315,11 @@ svg.rail line.unsorted {
   z-index: var(--code-text-z);
   vertical-align: middle;
 }
-.code-text.transparent {
-  opacity: 50%;
-}
-
-.term {
-  position: relative;
-}
 
 .empty-hole-path {
   fill: none;
+  stroke-width: 1px;
+  vector-effect: non-scaling-stroke;
 }
 .empty-hole-path.unsorted {
   stroke: var(--unsorted-shadow-color);
@@ -328,34 +332,6 @@ svg.rail line.unsorted {
 }
 .empty-hole-path.Typ {
   stroke: var(--typ-shadow-color);
-}
-
-.empty-hole-inset-shadow-flood.unsorted {
-  flood-color: var(--unsorted-shadow-color);
-}
-.empty-hole-inset-shadow-flood.Exp {
-  flood-color: var(--exp-shadow-color);
-}
-.empty-hole-inset-shadow-flood.Pat {
-  flood-color: var(--pat-shadow-color);
-}
-.empty-hole-inset-shadow-flood.Typ {
-  flood-color: var(--typ-shadow-color);
-}
-
-.paren {
-  position: relative;
-  top: -1px;
-}
-
-.decorated-tile,
-.decorated-uni-child,
-.decorated-term {
-  position: relative;
-}
-
-.zipped {
-  position: relative;
 }
 
 .selection-container {
@@ -464,27 +440,24 @@ svg.rail line.unsorted {
 .uni-child-path {
   stroke-width: 0.5;
   fill: none;
-  /*filter: url(#outer-drop-shadow);*/
-  /*filter: url(#uni-child-gradient);*/
-  /*stroke: url(#uni-child-gradient);*/
 }
 .bidelimited-open-child-path {
   stroke-width: 0.4;
 }
-/*
-.uni-child-path.Exp {
-  stroke: var(--exp-shadow-color);
+
+.code .delim {
+  color: var(--delim-color);
+  font-weight: bold;
 }
-.uni-child-path.Pat {
-  stroke: var(--pat-shadow-color);
+.code .ap {
+  color: var(--ap-color);
 }
-.uni-child-path.Typ {
-  stroke: var(--typ-shadow-color);
-}
-*/
 
 .tile-container.Revealed {
-  opacity: 0.6;
+  z-index: var(--revealed-tile-z);
+}
+.tile-container.Revealed .tile-path {
+  fill: var(--revealed-tile-color);
 }
 
 
@@ -498,7 +471,6 @@ svg.rail line.unsorted {
 }
 
 .tessera-path {
-  /*stroke-width: 0.3; */
   filter: url(#drop-shadow-tessera);
   fill: var(--unselected-tessera-color);
   stroke: var(--unsorted-shadow-color);
@@ -651,10 +623,6 @@ svg.rail line.unsorted {
     stroke: var(--hole-stroke-color);
     fill: var(--hole-stroke-color);
   }
-  /* 99% {
-    stroke: var(--hole-stroke-color);
-    fill: var(--hole-stroke-color);
-  } */
   100% {
     stroke: var(--exp-shadow-color);
     fill: var(--exp-shadow-color);
@@ -665,10 +633,6 @@ svg.rail line.unsorted {
     stroke: var(--hole-stroke-color);
     fill: var(--hole-stroke-color);
   }
-  /* 99% {
-    stroke: var(--hole-stroke-color);
-    fill: var(--hole-stroke-color);
-  } */
   100% {
     stroke: var(--exp-shadow-color);
     fill: var(--exp-shadow-color);
@@ -680,10 +644,6 @@ svg.rail line.unsorted {
     stroke: var(--hole-stroke-color);
     fill: var(--hole-stroke-color);
   }
-  /* 99% {
-    stroke: var(--hole-stroke-color);
-    fill: var(--hole-stroke-color);
-  } */
   100% {
     stroke: var(--pat-shadow-color);
     fill: var(--pat-shadow-color);
@@ -694,10 +654,6 @@ svg.rail line.unsorted {
     stroke: var(--hole-stroke-color);
     fill: var(--hole-stroke-color);
   }
-  /* 99% {
-    stroke: var(--hole-stroke-color);
-    fill: var(--hole-stroke-color);
-  } */
   100% {
     stroke: var(--pat-shadow-color);
     fill: var(--pat-shadow-color);
@@ -715,13 +671,11 @@ svg.rail line.unsorted {
   inherits: false;
 }
 #caret-bar {
-  /*--color: var(--light-text-color);*/
   position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
   left: -1px;
-  /*border-left: 2px solid var(--color);*/
   z-index: var(--caret-bar-z);
 }
 #caret-bar.Exp {
@@ -747,9 +701,6 @@ svg.rail line.unsorted {
   0% {
     border-left: 2px solid var(--hole-stroke-color);
   }
-  /* 99% {
-    border-left: 2px solid var(--hole-stroke-color);
-  } */
   100% {
     border-left: 2px solid var(--exp-shadow-color);
   }
@@ -758,9 +709,6 @@ svg.rail line.unsorted {
   0% {
     border-left: 2px solid var(--hole-stroke-color);
   }
-  /* 99% {
-    border-left: 2px solid var(--hole-stroke-color);
-  } */
   100% {
     border-left: 2px solid var(--exp-shadow-color);
   }
@@ -770,9 +718,6 @@ svg.rail line.unsorted {
   0% {
     border-left: 2px solid var(--hole-stroke-color);
   }
-  /* 99% {
-    border-left: 2px solid var(--hole-stroke-color);
-  } */
   100% {
     border-left: 2px solid var(--pat-shadow-color);
   }
@@ -781,9 +726,6 @@ svg.rail line.unsorted {
   0% {
     border-left: 2px solid var(--hole-stroke-color);
   }
-  /* 99% {
-    border-left: 2px solid var(--hole-stroke-color);
-  } */
   100% {
     border-left: 2px solid var(--pat-shadow-color);
   }
@@ -795,13 +737,6 @@ svg.rail line.unsorted {
   grid-auto-flow: column;
 }
 
-#type-info {
-  position: absolute;
-  top: 0;
-  left: 0;
-  font: 10pt "Helvetica Neue";
-  border-radius: 4px;
-}
 .sort-label {
   border-radius: 2px;
   padding: 0 2px;
@@ -815,32 +750,6 @@ svg.rail line.unsorted {
 }
 .sort-label.exp {
   background-color: var(--exp-bg-color);
-}
-
-.type-info-msg {
-  display: grid;
-  grid-template-columns: 180px auto;
-  grid-template-rows: auto auto auto;
-  column-gap: 16px;
-  position: relative;
-  left: -188px;
-  grid-auto-flow: row;
-}
-
-.type-info-msg .type-info-label {
-  justify-self: right;
-  align-self: center;
-  background-color: var(--light-page-color);
-  box-shadow: 0 0 4px 2px var(--light-page-color);
-}
-
-.type-info-msg .inconsistent {
-  border-bottom: 1px dashed var(--hole-stroke-color);
-}
-
-.type-info-msg .code {
-  justify-self: left;
-  margin-left: -6px;
 }
 
 #action-table {
@@ -896,11 +805,6 @@ svg.rail line.unsorted {
 
 #action-table .construct-shape {
   justify-self: left;
-}
-
-.emph {
-  color: rgb(210, 82, 82);
-  font-weight: bold;
 }
 
 .keyboard-arrow {
