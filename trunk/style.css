@@ -94,12 +94,12 @@
   --genie-z: 1;
   --empty-hole-z: 2;
   --err-hole-z: 2;
-  --revealed-tile-z: 2;
-  --uni-child-z: 3;
-  --tile-z: 3;
-  --inset-empty-hole-z: 4;
-  --code-text-z: 5;
-  --placeholder-z: 6;
+  --revealed-tile-z: 3;
+  --uni-child-z: 4;
+  --tile-z: 4;
+  --inset-empty-hole-z: 5;
+  --ap-z: 6;
+  --code-text-z: 6;
   --target-bounds-z: 7;
   --flag-z: 8;
   --bar-z: 0;
@@ -125,10 +125,18 @@
   color: var(--light-text-color);
 }
 
-#logo {
+#top-bar {
   position: fixed;
-  top: 5%;
+  left: 0;
+  top: min(max(8px, 4%), 24px);
+  width: 100vw;
+  height: 40px;
+}
+
+#logo {
+  position: absolute;
   left: 50%;
+  top: 50%;
   transform: translate(-50%, -50%);
 }
 #logo-text {
@@ -160,12 +168,20 @@
 
 #code-container {
   position: fixed;
-  top: 40%;
+  /* 350px is height of action table */
+  /* 50px is height of logo */
+  top: max(min(23%, 100vh - 350px), 80px);
   left: 0%;
   width: 100vw;
 }
 #code-container:focus {
   outline: none;
+}
+
+@media screen and (min-height: 800px) {
+  #code-container {
+    top: max(min(30%, 100vh - 350px), 64px);
+  }
 }
 
 #spotlight {
@@ -195,10 +211,18 @@
   fill: var(--bar-color);
 }
 
+#history-button-container {
+  position: absolute;
+  top: 50%;
+  left: max(16px, min(2%, 32px));
+  transform: translate(0%, -60%);
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto;
+  column-gap: 16px;
+}
+
 .history-button {
-  position: fixed;
-  top: 5%;
-  transform: translate(0%, -50%);
   font: 14pt 'Helvetica Neue';
   font-weight: bold;
 }
@@ -232,13 +256,6 @@
 }
 .history-button.disabled:hover path {
   fill: var(--light-text-color);
-}
-
-#undo {
-  left: 32px;
-}
-#redo {
-  left: 68px;
 }
 
 svg.rail line {
@@ -374,6 +391,16 @@ svg.rail line.unsorted {
   box-sizing: border-box;
   box-shadow: inset 1px 1px 2px darkgray;
   border-radius: 4px;
+}
+
+.ap-container {
+  z-index: var(--ap-z);
+}
+.ap-path {
+  stroke: var(--ap-color);
+  stroke-width: 2px;
+  fill: none;
+  vector-effect: non-scaling-stroke;
 }
 
 .decoration-container {
@@ -662,7 +689,7 @@ svg.rail line.unsorted {
 
 #caret {
   position: absolute;
-  height: 80vh;
+  height: 100vh;
   z-index: var(--caret-z);
 }
 @property --color {
@@ -672,17 +699,18 @@ svg.rail line.unsorted {
 }
 #caret-bar {
   position: absolute;
-  width: 100%;
   height: 100%;
   top: 0;
-  left: -1px;
+  left: 0;
+  width: 2px;
+  transform: translate(-50%, 0%);
   z-index: var(--caret-bar-z);
 }
 #caret-bar.Exp {
-  border-left: 2px solid var(--exp-shadow-color);
+  background-color: var(--exp-shadow-color);
 }
 #caret-bar.Pat {
-  border-left: 2px solid var(--pat-shadow-color);
+  background-color: var(--pat-shadow-color);
 }
 #caret-bar.Exp.just-failed-0 {
   animation: failedexpbar0 var(--err-flash-duration);
@@ -699,35 +727,35 @@ svg.rail line.unsorted {
 
 @keyframes failedexpbar0 {
   0% {
-    border-left: 2px solid var(--hole-stroke-color);
+    background-color: var(--hole-stroke-color);
   }
   100% {
-    border-left: 2px solid var(--exp-shadow-color);
+    background-color: var(--exp-shadow-color);
   }
 }
 @keyframes failedexpbar1 {
   0% {
-    border-left: 2px solid var(--hole-stroke-color);
+    background-color: var(--hole-stroke-color);
   }
   100% {
-    border-left: 2px solid var(--exp-shadow-color);
+    background-color: var(--exp-shadow-color);
   }
 }
 
 @keyframes failedpatbar0 {
   0% {
-    border-left: 2px solid var(--hole-stroke-color);
+    background-color: var(--hole-stroke-color);
   }
   100% {
-    border-left: 2px solid var(--pat-shadow-color);
+    background-color: var(--pat-shadow-color);
   }
 }
 @keyframes failedpatbar1 {
   0% {
-    border-left: 2px solid var(--hole-stroke-color);
+    background-color: var(--hole-stroke-color);
   }
   100% {
-    border-left: 2px solid var(--pat-shadow-color);
+    background-color: var(--pat-shadow-color);
   }
 }
 
@@ -755,6 +783,7 @@ svg.rail line.unsorted {
 #action-table {
   position: relative;
   left: -128px;
+  top: min(100px, max(10%, 80px));
   font: 10pt "Helvetica Neue";
   display: grid;
   grid-template-columns: 120px auto;
@@ -782,13 +811,16 @@ svg.rail line.unsorted {
   display: grid;
   grid-template-rows: 1fr;
   grid-auto-flow: column;
+  column-gap: 4px;
+}
+#action-table .keys.with-hyphen {
+  column-gap: 2px;
 }
 #action-table .key {
   background-color: var(--key-bg-color);
   color: var(--key-text-color);
   border-radius: 3px;
-  padding: 1.5px 3px;
-  margin: 0 2px;
+  padding: 2px 4px;
   min-width: 12px;
   display: grid;
   justify-content: center;
@@ -809,5 +841,6 @@ svg.rail line.unsorted {
 
 .keyboard-arrow {
   position: relative;
-  top: -1px;
+  font-family: 'Fira Code';
+  top: 1px;
 }
