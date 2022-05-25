@@ -340,6 +340,7 @@ svg.rail line.unsorted {
 }
 
 .code-text {
+  line-height: 1; /* TODO(andrew)*/
   position: relative;
   z-index: var(--code-text-z);
   vertical-align: middle;
