@@ -80,6 +80,10 @@
   --pat-shadow-color: #268bd2;
   --pat-rail-color: #a1c4dd;
 
+  --rul-bg-color: #f6e7db;
+  --rul-shadow-color: #9f6132;
+  --rul-rail-color: #d3b6a7;
+
   --typ-bg-color: #caccf4;
   --typ-shadow-color: #6168d4;
 
@@ -594,6 +598,19 @@ svg.rail line.unsorted {
   flood-color: var(--pat-shadow-color);
 }
 
+
+/* TODO(andrew): rename below */
+.tile-path.Rul {
+  /*stroke: var(--typ-shadow-color);*/
+  filter: url(#drop-shadow-Typ);
+}
+.tile-path.Rul.highlighted {
+  fill: var(--rul-bg-color);
+}
+.tile-path.Rul.raised {
+  filter: url(#raised-drop-shadow-Typ);
+}
+
 .tile-path.Typ {
   /*stroke: var(--typ-shadow-color);*/
   filter: url(#drop-shadow-Typ);
@@ -845,6 +862,9 @@ svg.rail line.unsorted {
 .sort-label.typ {
   background-color: var(--typ-bg-color);
 }
+.sort-label.rul {
+  background-color: var(--rul-bg-color);
+}
 .sort-label.pat {
   background-color: var(--pat-bg-color);
 }
@@ -858,6 +878,9 @@ svg.rail line.unsorted {
 .sort-label.Pat {
   /*color: var(--light-page-color);*/
   color: var(--pat-shadow-color);
+}
+.sort-label.Rul {
+  color: var(--rul-shadow-color);
 }
 
 #action-table {
