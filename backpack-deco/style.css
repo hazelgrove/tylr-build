@@ -347,20 +347,43 @@ svg.rail line.unsorted {
 }
 
 .code-text {
-  line-height: 1; /* TODO(andrew)*/
-  position: relative;
+  /*line-height: 1;  TODO(andrew)*/
+  position: absolute;
   z-index: var(--code-text-z);
   vertical-align: middle;
+}
+
+/* TODO(andrew): refactor to make this unnecessary */
+.backpack .code-text {
+  position: relative;
+}
+
+/* NOTE(andrew): below 3 styles are part of
+   a hack to display incomplete delims in 
+   selections */
+.code-text-shards {
+  /*line-height: 1; TODO(andrew)*/
+  position: absolute;
+  z-index: 9;
+  vertical-align: middle;
+}
+.code-text-shards span {
+  color: #0000 !important;
+}
+.code-text-shards span.delim-incomplete {
+  color: #ce9600 !important;
 }
 
 .empty-hole {
   color: #0000;
 }
 .empty-hole-path {
-  fill: none;
-  stroke-width: 1px;
+  fill: #f1e8cd;
+  stroke: #dbcca7;
+  stroke-width: 0.75px;
   vector-effect: non-scaling-stroke;
 }
+/*
 .empty-hole-path.unsorted {
   stroke: var(--unsorted-shadow-color);
 }
@@ -373,7 +396,7 @@ svg.rail line.unsorted {
 .empty-hole-path.Typ {
   stroke: var(--typ-shadow-color);
 }
-
+*/
 .selection-container {
   position: relative;
 }
