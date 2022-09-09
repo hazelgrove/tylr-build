@@ -142,6 +142,7 @@
   top: min(max(8px, 4%), 24px);
   width: 100vw;
   height: 40px;
+  visibility: hidden;
 }
 
 #logo {
@@ -181,7 +182,7 @@
   position: fixed;
   /* 350px is height of action table */
   /* 50px is height of logo */
-  top: max(min(23%, 100vh - 350px), 80px);
+  top: max(min(23%, 100vh), 180px); /*max(min(23%, 100vh - 350px), 80px);*/
   left: 0%;
   width: 100vw;
 }
@@ -852,6 +853,7 @@ svg.rail line.unsorted {
   column-gap: 16px;
   color: var(--action-text-color);
   z-index: var(--action-table-z);
+  display: none;
 }
 
 #action-table .keys-container {
