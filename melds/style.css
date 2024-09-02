@@ -99,6 +99,10 @@
   opacity: 40%;
 }
 
+.tile.match {
+  font-weight: bold;
+}
+
 #page {
   overflow-x: auto;
   overflow-y: auto;
@@ -338,10 +342,12 @@
   vector-effect: non-scaling-stroke;
 }
 .child-line.Exp {
-  stroke: var(--exp-shadow-color);
+  /* stroke: var(--exp-shadow-color); */
+  stroke: var(--exp-bg-color);
 }
 .child-line.Pat {
-  stroke: var(--pat-shadow-color);
+  /* stroke: var(--pat-shadow-color); */
+  stroke: var(--pat-bg-color);
 }
 
 
