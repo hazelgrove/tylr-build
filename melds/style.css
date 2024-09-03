@@ -38,7 +38,7 @@
   --exp-shadow-color: #c4b599;/*#329f43;*/
   --exp-rail-color: #a7d3ad;
 
-  --pat-bg-color: #f5fbff;
+  --pat-bg-color: #d8e6ef; /* #f5fbff; */
   --pat-shadow-color: #90bdde; /*#268bd2;*/
   --pat-rail-color: #a1c4dd;
 
@@ -338,6 +338,7 @@
 
 .child-line {
   stroke-width: 3;
+  stroke-linecap: round;
   fill: none;
   vector-effect: non-scaling-stroke;
 }
@@ -408,9 +409,18 @@
   filter: url(#raised-drop-shadow-Nul) !important;
 }
 
+.tok-bar {
+  stroke-width: 3;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
 .tile-path.Exp {
   /*stroke: var(--exp-shadow-color);*/
-  /* filter: url(#drop-shadow-Exp); */
+  /* filter: url(#raised-drop-shadow-Exp); */
+}
+.tok-bar.Exp {
+  stroke: var(--exp-shadow-color);
 }
 
 .tile-path.Any.indicated {
@@ -450,7 +460,10 @@
 
 .tile-path.Pat {
   /*stroke: var(--pat-shadow-color);*/
-  /* filter: url(#drop-shadow-Pat); */
+  /* filter: url(#raised-drop-shadow-Pat); */
+}
+.tok-bar.Pat {
+  stroke: var(--pat-shadow-color);
 }
 .tile-path.Pat.indicated {
   fill: var(--pat-bg-color);
@@ -471,7 +484,7 @@
 
 .tile-path.Typ {
   /*stroke: var(--typ-shadow-color);*/
-  filter: url(#drop-shadow-Typ);
+  filter: url(#raised-drop-shadow-Typ);
 }
 .tile-path.Typ.indicated {
   fill: var(--typ-bg-color);
@@ -952,9 +965,13 @@ svg {
 #caret.blink {
   animation: 1s blink step-end infinite;
 }
-.caret-path {
-  fill: #f62116;
-  stroke: none;
+.caret {
+  fill: none;
+  stroke: #f62116;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
 }
 @keyframes blink {
   from, to {
