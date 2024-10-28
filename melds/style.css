@@ -121,12 +121,21 @@
   fill: var(--outer-silhouette-color);
   filter: url(#silhouette-outer-blur);
 }
-.silhouette.inner {
+.silhouette.inner, .silhouette.space {
   fill: var(--inner-silhouette-color);
   filter: url(#silhouette-inner-blur);
   transform-origin: center;
   transform-box: fill-box;
-  transform: scale(1.2, 1.25) translate(0, 2%);
+  /* transform: scale(1.2, 1.25) translate(0, 2%); */
+  /* transform: translate(0, 2%); */
+}
+.silhouette.glue {
+  fill: var(--inner-silhouette-color);
+  filter: url(#silhouette-inner-blur);
+  transform-origin: center;
+  transform-box: fill-box;
+  /* transform: scale(1, 1.25) translate(0, 2%); */
+  /* transform: translate(0, 2%); */
 }
 
 #page {
@@ -559,7 +568,8 @@ svg {
   stroke: var(--caret-focus-color);
 }
 .caret.anchor {
-  stroke: var(--caret-anchor-color);
+  /* stroke: var(--caret-anchor-color); */
+  stroke: none;
 }
 .caret-container {
   position: relative;
